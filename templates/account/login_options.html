@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock title %}
+{% block css %}
+<style>
+    .container {
+        margin-top: 50px;
+    }
+
+    .buttons {
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .reg-btn {
+        /* button */
+        border: 1px solid #000;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        color: #000;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    .reg-btn:hover {
+        background-color: #000;
+        color: #fff;
+    }
+</style>
+{% endblock css %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h2>Login</h2>
+            <div class="buttons">
+                <a class="reg-btn" href="{% url 'manager_login' %}">Manager</a>
+                <a class="reg-btn" href="{% url 'employee_login' %}">Employee</a>
+                <a class="reg-btn" href="{% url 'customer_login' %}">Customer</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

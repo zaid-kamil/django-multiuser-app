@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}Manager Profile{% endblock %}
+
+{% block css %}
+<style>
+    .container {
+        text-align: left;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: calc(100vh - 150px);
+    }
+
+    .sidebar {
+        width: 20%;
+        background-color: #f4f4f4;
+        padding: 20px;
+        position: sticky;
+        top: 10rem;
+
+    }
+
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 20px;
+    }
+
+    .sidebar ul li a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .sidebar ul li a:hover {
+        color: #0000ff;
+    }
+
+    .content {
+        width: calc(80% - 40px);
+        
+    }
+
+    .header-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
+
+    .header-bar h1 {
+        margin: 0;
+    }
+
+    .header-bar a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .header-bar a:hover {
+        color: #0000ff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="sidebar">
+        <ul>
+            <li><a href="#">Create Task</a></li>
+            <li><a href="#">View Task</a></li>
+            <li><a href="#">View Employees</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="header-bar">
+            <h3>Manager Profile</h3>
+            {{profile}}
+        </div>
+        <div class="content">
+
+        </div>
+    </div>
+</div>
+{% endblock %}
