@@ -5,9 +5,11 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from django.shortcuts import redirect
 from .models import Task, Todo
+from common.decorators import user_in_group_required
 
 # task views
-@login_required(login_url='manager_login')
+@login_required()
+@user_in_group_required(['manager'])
 def task_create_view(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -22,13 +24,16 @@ def task_create_view(request):
         'employees': employees
     })
 
+@login_required()
+@user_in_group_required(['manager'])
 def task_list_view(request):
     tasks = Task.objects.all()
     return render(request, 'index.html',{
         'tasks': tasks
     })
 
-@login_required(login_url='manager_login')
+@login_required()
+@user_in_group_required(['manager'])
 def task_update_view(request, id):
     task = Task.objects.get(id=id)
     if request.method == 'POST':
@@ -41,7 +46,8 @@ def task_update_view(request, id):
         'task': task
     })
 
-@login_required(login_url='manager_login')
+@login_required()
+@user_in_group_required(['manager'])
 def task_delete_view(request, id):
     task = Task.objects.get(id=id)
     task.delete()
@@ -49,7 +55,8 @@ def task_delete_view(request, id):
     return redirect('task_list')
 
 # todo views
-@login_required(login_url='employee_login')
+@login_required()
+@user_in_group_required(['manager','employee'])
 def todo_create_view(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -66,14 +73,16 @@ def todo_create_view(request):
         'tasks': tasks
     })
 
-@login_required(login_url='employee_login')
+@login_required()
+@user_in_group_required(['manager','employee'])
 def todo_list_view(request):
     todos = Todo.objects.filter(created_by=request.user)
     return render(request, 'todo/list.html',{
         'todos': todos
     })
 
-@login_required(login_url='employee_login')
+@login_required()
+@user_in_group_required(['manager','employee'])
 def todo_update_view(request, id):
     todo = Todo.objects.get(id=id)
     if request.method == 'POST':
@@ -88,7 +97,8 @@ def todo_update_view(request, id):
         'tasks': tasks
     })
 
-@login_required(login_url='employee_login')
+@login_required()
+@user_in_group_required(['manager','employee'])
 def todo_delete_view(request, id):
     todo = Todo.objects.get(id=id)
     todo.delete()

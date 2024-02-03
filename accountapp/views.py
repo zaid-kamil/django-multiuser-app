@@ -5,6 +5,7 @@ from django.contrib.auth.models import User, Group
 from .models import ManagerProfile, EmployeeProfile, CustomerProfile
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from common.decorators import user_in_group_required
 
 def login_options_view(request):
     return render(request, 'account/login_options.html')
@@ -88,6 +89,9 @@ def employee_login_view(request):
             messages.error(request, 'Invalid username or password')
     return render(request, 'account/employee_login.html')
 
+
+@user_in_group_required(['manager'])
+@login_required(login_url='manager_login')
 def employee_register_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')

@@ -19,6 +19,7 @@ class EmployeeProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     position = models.CharField(max_length=100, default='Employee')
+    manager = models.ForeignKey(ManagerProfile, on_delete=models.CASCADE, default=None, null=True, blank=True)
     # other details
 
     def __str__(self):
